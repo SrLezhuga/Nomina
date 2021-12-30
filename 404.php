@@ -8,7 +8,7 @@
 </head>
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-lg mb-5 mt-5">
     <h4>Centro De Servicio</h4>
 </nav>
 <!-- End of Topbar -->
@@ -18,7 +18,7 @@
     <!-- 404 Error Text -->
     <div class="text-center">
         <br>
-        <img class='img-fluid mx-auto d-block' src='../CentroServicio/assets/img/Logo/logo.webp' style='height: 160px; width: 160px; z-index: 0; opacity: 1;' onContextMenu='return false;' draggable='false'>
+        <img class='img-fluid mx-auto d-block' src='../CentroServicio/assets/img/Logo/logo.png' style='height: 160px; width: 160px; z-index: 0; opacity: 1;' onContextMenu='return false;' draggable='false'>
         <br>
         <div class="error mx-auto" data-text="404">404</div>
         <p class="lead text-gray-800 mb-5">Página no encontrada</p>

@@ -11,7 +11,7 @@ class conexion{
         $this->servidor = "localhost";
         $this->usuario = "root";
         $this->contra = "";
-        $this->db = "mfa_nomina";
+        $this->db = "nomina";
     }
     function conectar()
     {

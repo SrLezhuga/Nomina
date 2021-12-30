@@ -7,7 +7,7 @@ date_default_timezone_set("America/Mexico_City");
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Inicio</title>
+    <title> Nómina | Inicio</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -29,7 +29,7 @@ date_default_timezone_set("America/Mexico_City");
             <div class="container">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h2>
                             <center>Avisos</center>
@@ -90,16 +90,18 @@ date_default_timezone_set("America/Mexico_City");
 
             </div>
 
-            <!-- footer -->
-            <?php include("assets/common/foter.php"); ?>
-            <!-- End of footer -->
-
         </div>
         <!-- /#page-content-wrapper -->
 
 
     </div>
     <!-- /#wrapper -->
+
+
+    <!-- footer -->
+    <?php include("assets/common/foter.php"); ?>
+    <!-- End of footer -->
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

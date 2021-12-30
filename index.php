@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <?php include("assets/common/bg.php"); ?>
+
     <?php include("assets/common/header.php"); ?>
     <script src="assets/js/demo/loader.js"></script>
-    <title> Nominas MFA | Login</title>
+    <title> Nómina  | Login</title>
 </head>
 
-<body <?php echo $bgn; ?>>
+<body>
     <div class="lds-ring loader-in" id="loader">
         <div></div>
         <div></div>
@@ -23,7 +23,7 @@
 
             <div class="col-xl-8 col-lg-10 col-md-6">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg mb-5 mt-5-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row card-color">
@@ -31,7 +31,7 @@
                             <div class="col-xl-5 col-lg-5 col-md-6 col-sm-5 col-xs-5">
                                 <div class="p-4">
                                     <div class="text-center">
-                                        <center><img src="assets\img\Logo\logo.webp" class="mx-auto d-block" style="width: 100%;" onContextMenu="return false;" draggable="false" />
+                                        <center><img src="assets\img\Logo\logo.png" class="mx-auto d-block" style="width: 100%;" onContextMenu="return false;" draggable="false" />
                                         </center>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="col-xl-7 col-lg-7 col-md-6 col-sm-7 col-xs-7">
                                 <div class="p-4">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Centro de servicio</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Nómina</h1>
                                     </div>
                                     <form class="user" action="./assets/controler/login.php" method="POST">
                                         <div class="input-group ">
@@ -60,8 +60,8 @@
                                             <input type="password" class="form-control form-control-lg" name="formPass" placeholder="Contraseña" aria-describedby="passwordHelpInline" required>
                                         </div>
                                         <br>
-
-                                        <button type="submit" class="btn btn-outline-danger btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</button>
+                                        <a href="inicio" class="btn  btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</a>
+                                        <!-- <button type="submit" class="btn btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</button>-->
                                     </form>
                                 </div>
                             </div>

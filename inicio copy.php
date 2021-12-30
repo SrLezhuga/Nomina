@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Inicio</title>
+    <title> Nómina  | Inicio</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 

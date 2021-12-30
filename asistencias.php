@@ -25,130 +25,358 @@ date_default_timezone_set("America/Mexico_City"); ?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
                 <div class="card border-left-pink shadow ">
                     <div class="card-body">
                         <h2>
-                            <center>Tabla de asistencias</center>
+                            <center>Captura semanal de asistencias</center>
                         </h2>
-                        <table class="table table-hover table-striped" id="dataTableEmpleado" style="font-size: smaller;">
-                            <thead>
-                                <tr>
-                                    <th>Empleado</th>
-                                    <th>Lun</th>
-                                    <th>Mar</th>
-                                    <th>Mie</th>
-                                    <th>Jue</th>
-                                    <th>Vie</th>
-                                    <th>Sab</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                        <fieldset class='border p-2'>
+                            <legend class='w-auto'>Capturar asistencias:</legend>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Fecha:</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="date" class="form-control" name="form_Fec" id="form_Fec">
+                                    </div>
+                                </div>
+                                <!--Campo Empleado -->
+                                <div class="col-6">
+                                    <label>Empleado:</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                        <select name="FromEmpleado" id="FromEmpleado" class="mi-selector custom-select">
+                                            <option value="0" selected disabled>Seleccione datos del empleado</option>
+                                            <?php $listEmp = "SELECT id_empleado, concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) as nombre, status_empleado FROM nomina.tab_empleado WHERE status_empleado = 'ACTIVO' ORDER BY apellido_pat_empleado ASC";
+                                            $rsEmp = mysqli_query($con, $listEmp) or die("Error de consulta");
+                                            while ($itemEmp = mysqli_fetch_array($rsEmp)) {
+                                                echo "<option value='" . $itemEmp['id_empleado'] . "'>" . $itemEmp['id_empleado'] . " | " . $itemEmp['nombre'] .  "</option>";
+                                            } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label>Consultar:</label>
+                                    <div class="input-group ">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-block" onclick="CargarAsistencias()"><i class="fas fa-database"></i> Cargar Datos</button>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <br>
+                                    <center>
+                                        <h4>Semana del <b id="fecha_inicio">0000-00-00</b> al <b id="fecha_final">0000-00-00</b> .</h4>
+                                    </center>
+                                    <center>
+                                        <h6><b>1</b>= Asistencia <b>F</b>= Falta</h6>
+                                    </center>
+                                    <br>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <!--Campo Empleado -->
+                                        <div class="col-5">
+                                            <div class='form-group'>
+                                                <label><b>Empleado</b><br> <a id="id_empleado">00000</a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="nom_empleado" autocomplete="false" readonly="true">
+                                            </div>
+                                        </div>
+                                        <!--Campo Domingo -->
+                                        <div class="col-1">
+                                            <div class='form-group'>
+                                                <label><b>Domingo</b> <br> <a id="Fec_Domingo"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Domingo">
+                                            </div>
+                                        </div>
+                                        <!--Campo Lunes -->
+                                        <div class="col-1">
+                                            <div class='form-group'>
+                                                <label><b>Lunes</b> <br> <a id="Fec_Lunes"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Lunes">
+                                            </div>
+                                        </div>
+                                        <!--Campo Martes -->
+                                        <div class="col-1">
+                                            <div class=' form-group'>
+                                                <label><b>Martes</b> <br> <a id="Fec_Martes"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Martes">
+                                            </div>
+                                        </div>
+                                        <!--Campo Miercoles -->
+                                        <div class="col-1">
+                                            <div class=' form-group'>
+                                                <label><b>Miercoles</b> <br> <a id="Fec_Miercoles"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Miercoles">
+                                            </div>
+                                        </div>
+                                        <!--Campo Jueves -->
+                                        <div class="col-1">
+                                            <div class=' form-group'>
+                                                <label><b>Jueves</b> <br> <a id="Fec_Jueves"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Jueves">
+                                            </div>
+                                        </div>
+                                        <!--Campo Viernes -->
+                                        <div class="col-1">
+                                            <div class=' form-group'>
+                                                <label><b>Viernes</b> <br> <a id="Fec_Viernes"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Viernes">
+                                            </div>
+                                        </div>
+                                        <!--Campo Sabado -->
+                                        <div class="col-1">
+                                            <div class=' form-group'>
+                                                <label> <b> Sabado </b><br> <a id="Fec_Sabado"> 1999-99-99 </a></label>
+                                                <input type='text' class='form-control form-control-sm' value='' id="Sabado">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                    <div class="input-group ">
+                                        <button type="button" class="btn btn-sm btn-outline-pink btn-block " onclick="RegistrarAsistencias()" disabled id="btn_guardar"><i class="fas fa-save"></i> Guardar Datos</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
 
-                                $sem_actual = date('Y-m-d');
+                        <script>
+                            $(document).ready(function() {
+                                DesactivarCampos();
+                            });
 
-                                $date_obj = new DateTime('2021-01-31'); // Crear un objeto de fecha
-                                $num_day = $date_obj->format('w'); // 0-dom, 1-lun, ... 6-sab
-                                $date_obj->modify("-$num_day day"); // Posicionar el objeto en domingo
-                                $wdays = array();
-                                for ($i = 0; $i < 7; $i++) {
-                                    $wdays[] = $date_obj->format('Y-m-d');
-                                    $date_obj->modify('+1 day'); // Incrementar el objeto 1 dia
+                            function CargarAsistencias() {
+                                var id_empleado = $("#FromEmpleado").val();
+                                var fecha = $("#form_Fec").val();
+
+                                $.ajax({
+                                    url: "assets/controler/semanal/precarga.php",
+                                    type: "post",
+                                    data: {
+                                        Ide: id_empleado,
+                                        Fec: fecha
+                                    },
+                                    success: function(data) {
+                                        var obj = JSON.parse(data);
+                                        if (obj.status == "ok") {
+                                            $("#fecha_inicio").html(obj.fec_ini);
+                                            $("#fecha_final").html(obj.fec_fin);
+                                            $("#id_empleado").html(obj.id_empleado);
+                                            $("#nom_empleado").val(obj.nom_empleado);
+                                            //Domingo
+                                            $("#Fec_Domingo").html(obj.Fec_Domingo);
+                                            $("#Domingo").val(obj.Domingo);
+                                            //Lunes
+                                            $("#Fec_Lunes").html(obj.Fec_Lunes);
+                                            $("#Lunes").val(obj.Lunes);
+                                            //Martes
+                                            $("#Fec_Martes").html(obj.Fec_Martes);
+                                            $("#Martes").val(obj.Martes);
+                                            //Miercoles
+                                            $("#Fec_Miercoles").html(obj.Fec_Miercoles);
+                                            $("#Miercoles").val(obj.Miercoles);
+                                            //Jueves
+                                            $("#Fec_Jueves").html(obj.Fec_Jueves);
+                                            $("#Jueves").val(obj.Jueves);
+                                            //Viernes
+                                            $("#Fec_Viernes").html(obj.Fec_Viernes);
+                                            $("#Viernes").val(obj.Viernes);
+                                            //Sabado
+                                            $("#Fec_Sabado").html(obj.Fec_Sabado);
+                                            $("#Sabado").val(obj.Sabado);
+                                            ActivarCampos();
+                                        } else {
+                                            Swal.fire(
+                                                "Mensaje de advertencia",
+                                                "Error: " + obj.msg,
+                                                "error"
+                                            );
+                                        }
+                                    }
+                                });
+                            }
+
+                            function DesactivarCampos() {
+                                document.getElementById("btn_guardar").disabled = true;
+                                //Domingo
+                                var v_dom = $("#Domingo").prop("disabled", true);
+                                //Lunes
+                                var v_lun = $("#Lunes").prop("disabled", true);
+                                //Martes
+                                var v_mar = $("#Martes").prop("disabled", true);
+                                //Miercoles
+                                var v_mie = $("#Miercoles").prop("disabled", true);
+                                //Jueves
+                                var v_jue = $("#Jueves").prop("disabled", true);
+                                //Viernes
+                                var v_vie = $("#Viernes").prop("disabled", true);
+                                //Sabado
+                                var v_sab = $("#Sabado").prop("disabled", true);
+                            }
+
+                            function ActivarCampos() {
+                                document.getElementById("btn_guardar").disabled = false;
+                                //Domingo
+                                var v_dom = $("#Domingo").prop("disabled", false);
+                                //Lunes
+                                var v_lun = $("#Lunes").prop("disabled", false);
+                                //Martes
+                                var v_mar = $("#Martes").prop("disabled", false);
+                                //Miercoles
+                                var v_mie = $("#Miercoles").prop("disabled", false);
+                                //Jueves
+                                var v_jue = $("#Jueves").prop("disabled", false);
+                                //Viernes
+                                var v_vie = $("#Viernes").prop("disabled", false);
+                                //Sabado
+                                var v_sab = $("#Sabado").prop("disabled", false);
+
+                            }
+
+                            function RegistrarAsistencias() {
+                                var formData = new FormData();
+
+                                var f_fecha = $("#form_Fec").val();
+                                var id_empleado = $("#FromEmpleado").val();
+                                var nom_empleado = $("#nom_empleado").val();
+
+                                //Domingo
+                                if ($("#Domingo").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo domingo",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_dom = $("#Domingo").val();
                                 }
 
-                                echo "<center><h4>Semana del " . $wdays[1] . " al " . $wdays[6] . "</h4></center>";
-                                echo "<center><h6>1 = Asistencia 2 = Doble Turno R= Retardo RR= Doble Retardo F=Falta M=Medio Turno</h6></center>";
-
-                                $queryEmpleado = "SELECT DISTINCT id_empleado, nom_empleado FROM tab_asistencia;";
-                                $rsEmpleado = mysqli_query($con, $queryEmpleado) or die("Error de consulta");
-                                while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
-
-                                    $queryLun = "SELECT status AS Lun, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[1] . "';";
-                                    $rsLun = mysqli_query($con, $queryLun) or die("Error de consulta");
-                                    $Lun = mysqli_fetch_array($rsLun);
-
-                                    $queryMar = "SELECT status AS Mar, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[2] . "';";
-                                    $rsMar = mysqli_query($con, $queryMar) or die("Error de consulta");
-                                    $Mar = mysqli_fetch_array($rsMar);
-
-                                    $queryMie = "SELECT status AS Mie, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[3] . "';";
-                                    $rsMie = mysqli_query($con, $queryMie) or die("Error de consulta");
-                                    $Mie = mysqli_fetch_array($rsMie);
-
-                                    $queryJue = "SELECT status AS Jue, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[4] . "';";
-                                    $rsJue = mysqli_query($con, $queryJue) or die("Error de consulta");
-                                    $Jue = mysqli_fetch_array($rsJue);
-
-                                    $queryVie = "SELECT status AS Vie, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[5] . "';";
-                                    $rsVie = mysqli_query($con, $queryVie) or die("Error de consulta");
-                                    $Vie = mysqli_fetch_array($rsVie);
-
-                                    $querySab = "SELECT status AS Sab, fecha FROM tab_asistencia WHERE id_empleado = '" . $Empleado['id_empleado'] . "' AND fecha = '" . $wdays[6] . "';";
-                                    $rsSab = mysqli_query($con, $querySab) or die("Error de consulta");
-                                    $Sab = mysqli_fetch_array($rsSab);
-
-                                    echo "
-                                <tr>
-                                    <td>" . $Empleado['id_empleado'] . " - " . $Empleado['nom_empleado'] . "</td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Lun['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Lun['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Lun['Lun'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Mar['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Mar['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Mar['Mar'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Mie['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Mie['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Mie['Mie'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Jue['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Jue['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Jue['Jue'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Vie['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Vie['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Vie['Vie'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>" . $Sab['fecha'] . "</label>
-                                            <input type='hidden' name='' id='' value='" . $Sab['fecha'] . "'>
-                                            <input type='text' class='form-control form-control-sm' name='' id='' value='" . $Sab['Sab'] . "'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='form-group'>
-                                            <label>Guardar</label>
-                                            <button class='btn btn-pink btn-block btn-sm' type='submit'><i class='fas fa-save'></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                ";
+                                //Lunes
+                                if ($("#Lunes").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo lunes",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_lun = $("#Lunes").val();
                                 }
 
-                                ?>
-                            </tbody>
-                        </table>
+                                //Martes
+                                if ($("#Martes").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo martes",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_mar = $("#Martes").val();
+                                }
+
+                                //Miercoles
+                                if ($("#Miercoles").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo miercoles",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_mie = $("#Miercoles").val();
+                                }
+
+                                //Jueves
+                                if ($("#Jueves").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo jueves",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_jue = $("#Jueves").val();
+                                }
+
+                                //Viernes
+                                if ($("#Viernes").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo viernes",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_vie = $("#Viernes").val();
+                                }
+
+                                //Sabado
+                                if ($("#Sabado").val() == 0) {
+                                    Swal.fire(
+                                        "Mensaje de error",
+                                        "Falta valor en campo sabado",
+                                        "error"
+                                    );
+                                    return;
+                                } else {
+                                    var v_sab = $("#Sabado").val();
+                                }
+
+                                formData.append("f_fecha", f_fecha);
+                                formData.append("id_empleado", id_empleado);
+                                formData.append("nom_empleado", nom_empleado);
+                                formData.append("v_dom", v_dom);
+                                formData.append("v_lun", v_lun);
+                                formData.append("v_mar", v_mar);
+                                formData.append("v_mie", v_mie);
+                                formData.append("v_jue", v_jue);
+                                formData.append("v_vie", v_vie);
+                                formData.append("v_sab", v_sab);
+
+                                $.ajax({
+                                    url: "assets/controler/semanal/upSemanal.php",
+                                    type: "post",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(data) {
+
+                                        console.log(data);
+                                        var obj = JSON.parse(data);
+                                        if (obj.status == "ok") {
+
+                                            Swal.fire(
+                                                "Mensaje de confirmación",
+                                                "Correcto: " + obj.msg,
+                                                "success"
+                                            );
+                                            DesactivarCampos();
+                                            CargarAsistencias();
+                                        } else {
+                                            Swal.fire(
+                                                "Mensaje de advertencia",
+                                                "Error: " + obj.msg,
+                                                "error"
+                                            );
+                                        }
+                                    }
+                                });
+                            }
+                        </script>
+
 
                     </div>
                 </div>

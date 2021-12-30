@@ -3,8 +3,8 @@
         <div class="sidebar-header">
             <div class="sidebar-brand">
                 <a href="inicio">
-                    <img class='img-fluid mx-auto d-block' src='../CentroServicio/assets/img/Logo/logo.webp' style='height: 50px; width: 50px; z-index: 0; opacity: 1;' onContextMenu='return false;' draggable='false'>
-                    Nómina MFA
+                    <img class='img-fluid mx-auto d-block' src='../Nomina/assets/img/Logo/logo.png' style='height: 50px; width: 50px; z-index: 0; opacity: 1;' onContextMenu='return false;' draggable='false'>
+                    Nómina
                 </a>
             </div>
         </div>
@@ -17,8 +17,9 @@
                 <div class="dropdown-header">Menú Empleados</div>
                 <li><a href="altaEmpleado">Alta Empleados</a></li>
                 <li><a href="listaEmpleados">Lista Empleados</a></li>
-                <li><a href="#books">Buscar Empleado</a></li>
-                <li><a href="#art">Bajas Empleados</a></li>
+                <li><a href="buscarEmpleado">Buscar Empleado</a></li>
+                <li><a href="bajaEmpleado">Bajas Empleados</a></li>
+                <li><a href="cumpleEmpleado">Cumpleaños</a></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -37,12 +38,9 @@
                 <i class="fas fa-dollar-sign"></i> Percepciones <span class="caret"></span></a>
             <ul class="dropdown-menu animated fadeInLeft" role="menu">
                 <div class="dropdown-header">Menú Percepciones</div>
-                <li><a href="#pictures">Bonos</a></li>
-                <li><a href="#videos">Caja Ahorro</a></li>
-                <li><a href="#books">Horas Extra</a></li>
-                <li><a href="#art">Incapacidad</a></li>
-                <li><a href="#awards">Infonavit</a></li>
-                <li><a href="#awards">Prestamo</a></li>
+
+                <li><a href="incapacidad">Incapacidad</a></li>
+
             </ul>
         </li>
         <li class="dropdown">
@@ -59,8 +57,8 @@
                 <i class="fas fa-heartbeat"></i> Seguro <span class="caret"></span></a>
             <ul class="dropdown-menu animated fadeInLeft" role="menu">
                 <div class="dropdown-header">Menú Seguro</div>
-                <li><a href="altaImss">IMSS</a></li>
-                <li><a href="listaSeguro">Lista IMSS</a></li>
+                <li><a href="altaIssste">ISSSTE</a></li>
+                <li><a href="listaSeguro">Lista ISSSTE</a></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -78,19 +76,21 @@
             <ul class="dropdown-menu animated fadeInLeft" role="menu">
                 <div class="dropdown-header">Menú Nómina</div>
                 <li><a href="crearNomina">Crear Nómina</a></li>
-                <li><a href="#">Nómina por Empleado</a></li>
+                <li><a href="nomina">Nómina por Empleado</a></li>
             </ul>
         </li>
         <li class="dropdown">
             <a href="#works" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-file-contract"></i> Contratos <span class="caret"></span></a>
+                <i class="fas fa-file-contract"></i> Documentos <span class="caret"></span></a>
             <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                <div class="dropdown-header">Menú Contratos</div>
-                <li><a href="#pictures">Pictures</a></li>
-                <li><a href="#videos">Videeos</a></li>
-                <li><a href="#books">Books</a></li>
+                <div class="dropdown-header">Menú Documentos</div>
+                <li><a href="reporteEmpleados">Reporte Empleados</a></li>
+                <li><a href="reporteAsistencias">Reporte Asistencias</a></li>
+                <li><a href="reporteFaltas">Reporte Faltas</a></li>
+                <!--   <li><a href="#books">Books</a></li>
+                <li><a href="#pictures">Contratos</a></li>
                 <li><a href="#art">Art</a></li>
-                <li><a href="#awards">Awards</a></li>
+                <li><a href="#awards">Awards</a></li>-->
             </ul>
         </li>
     </ul>

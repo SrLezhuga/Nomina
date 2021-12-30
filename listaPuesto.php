@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Lista Puesto</title>
+    <title> Nómina  | Lista Puesto</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -23,17 +23,17 @@ include("assets/controler/conexion.php"); ?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h1>
                             <center>Lista Puesto</center>
                         </h1>
                         <!-- DataTales -->
                         <div class="table-responsive">
-                            <table class="table table-hover table-sm" id="dataTableCliente" width="100%" cellspacing="0">
+                            <table class="table table-hover table-sm" id="dataTablePuesto" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -44,7 +44,6 @@ include("assets/controler/conexion.php"); ?>
                                         <th>Fecha Fin</th>
                                         <th>Turno</th>
                                         <th>Status </th>
-                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,8 +65,6 @@ include("assets/controler/conexion.php"); ?>
                                                 <td>" . $Empleado['fecha_fin_contrato'] . "</td>
                                                 <td>" . $Empleado['turno'] . "</td>
                                                 <td>" . $Empleado['status'] . "</td>
-                                                <td><button type='button' class='btn btn-outline-light text-dark btn-sm BtnCliente' data-toggle='modal' data-target='#modalCliente'value=" . $Empleado['id_empleado'] . ">
-                                                <i class='fas fa-pencil-alt'></i></button></td>
                                             </tr>
                                         ";
                                     } ?>

@@ -4,7 +4,7 @@ date_default_timezone_set('UTC');
 include("../conexion.php");
 include("traslate.php");
 
-
+//$fecha  = '2021-12-18';
 $fecha = $_SESSION['FechaNomina'];
 
 
@@ -26,31 +26,31 @@ echo '
 <html>
 
 <head>
-    <title> Centro de Servicio MFA | Reporte</title>
-    <link rel="icon" href="http://localhost/Nomina/assets/img/Logo/MFA.ico" />
+    <title> Nómina | Reporte</title>
+    <link rel="icon" href="http://localhost/Nomina/assets/img/Logo/logo.ico" />
     <link href="http://localhost/Nomina/assets/controler/reportes/styles.css" rel="stylesheet" />
 </head>
 
 <body>
     ';
-    $queryContador = "SELECT count(*) AS contador FROM tab_sueldo";
-    $rsContador = mysqli_query($con, $queryContador) or die(mysqli_error($con));
-    $Contador = mysqli_fetch_array($rsContador);
-    $Contador['contador'];
-    
-$queryEmpleado = "SELECT * FROM tab_sueldo";
-$rsEmpleado = mysqli_query($con, $queryEmpleado) or die(mysqli_error($con));
-while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
+
+$queryEmpleado = "SELECT id_empleado FROM tab_empleado WHERE status_empleado = 'ACTIVO'";
+$rsDatosEmpleado = mysqli_query($con, $queryEmpleado) or die(mysqli_error($con));
+while ($DatosEmpleado = mysqli_fetch_array($rsDatosEmpleado)) {
+
+    $querySueldoEmpleado = "SELECT * FROM tab_sueldo WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
+    $rsEmpleado = mysqli_query($con, $querySueldoEmpleado) or die(mysqli_error($con));
+    $Empleado = mysqli_fetch_array($rsEmpleado);
 
     $queryPuesto = "SELECT puesto, edificio_agencia
           FROM tab_puesto 
-          WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
+          WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
     $rsPuesto = mysqli_query($con, $queryPuesto) or die(mysqli_error($con));
     $Puesto = mysqli_fetch_array($rsPuesto);
 
     $CedisEmpleado = strtoupper($Puesto['edificio_agencia']);
 
-    $queryCedis = "SELECT * FROM tab_cedis WHERE nombre = '" .$CedisEmpleado."'";
+    $queryCedis = "SELECT * FROM tab_cedis WHERE nombre = '" . $CedisEmpleado . "'";
     $rsCedis = mysqli_query($con, $queryCedis) or die(mysqli_error($con));
     $Cedis = mysqli_fetch_array($rsCedis);
     $NomCedis = $Cedis['nombre'];
@@ -63,45 +63,46 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
           FROM tab_asistencia AS a
           JOIN tab_empleado AS e
           ON a.id_empleado = e.id_empleado
-          WHERE a.id_empleado = '" . $Empleado['id_empleado'] . "' AND a.fecha BETWEEN '2021-01-31' AND '2021-02-06'
-          GROUP BY nom_empleado";
+          WHERE e.id_empleado = '" . $DatosEmpleado['id_empleado'] . "' AND a.fecha BETWEEN '2021-01-31' AND '2021-02-06'";
     $rsAsistencia = mysqli_query($con, $queryAsistencia) or die(mysqli_error($con));
     $Asistencia = mysqli_fetch_array($rsAsistencia);
 
-    $queryBono = "SELECT bono
+    /*$queryBono = "SELECT bono
           FROM tab_bono 
-          WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
+          WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
     $rsBono = mysqli_query($con, $queryBono) or die(mysqli_error($con));
     $Bono = mysqli_fetch_array($rsBono);
 
     $queryCaja = "SELECT caja_ahorro
           FROM tab_caja 
-          WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
+          WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
     $rsCaja = mysqli_query($con, $queryCaja) or die(mysqli_error($con));
     $Caja = mysqli_fetch_array($rsCaja);
 
     $queryInfonavit = "SELECT descuento
           FROM tab_infonavit 
-          WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
+          WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
     $rsInfonavit = mysqli_query($con, $queryInfonavit) or die(mysqli_error($con));
     $Infonavit = mysqli_fetch_array($rsInfonavit);
 
     $queryPrestamo = "SELECT descuento_semana
           FROM tab_prestamo 
-          WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
+          WHERE id_empleado = '" . $DatosEmpleado['id_empleado'] . "'";
     $rsPrestamo = mysqli_query($con, $queryPrestamo) or die(mysqli_error($con));
-    $Prestamo = mysqli_fetch_array($rsPrestamo);
+    $Prestamo = mysqli_fetch_array($rsPrestamo);*/
 
-    $NumeroEmpleado = $Empleado['id_empleado'];
+    $NumeroEmpleado = $DatosEmpleado['id_empleado'];
     $SalarioDiario = $Empleado['sueldo_diario'];
     $Deposito = $Empleado['fiscal'];
     $Salario = $Empleado['salario'];
-    $BonoEmpleado = $Bono['bono'];
-    $Incapacidad = 0; //Falta definir
 
-    $DesCajaAhorro = $Caja['caja_ahorro'];
-    $DesPrestamo = $Prestamo['descuento_semana'];
-    $DesInfonavit = $Infonavit['descuento'];
+
+    $ValBono = (!empty($Bono['bono'])) ? $BonoEmpleado = $Bono['bono'] : $BonoEmpleado = 0;
+    $Incapacidad = 0; //Falta definir
+    $ValCaja = (!empty($Caja['caja_ahorro'])) ? $DesCajaAhorro = $Caja['caja_ahorro'] : $DesCajaAhorro = 0;
+    $ValPrestamo = (!empty($Prestamo['descuento_semana'])) ? $DesPrestamo = $Prestamo['descuento_semana'] : $DesPrestamo = 0;
+    $ValInfonavit = (!empty($Infonavit['descuento'])) ? $DesInfonavit = $Infonavit['descuento'] : $DesInfonavit = 0;
+
 
 
     $PuestoEmpleado = $Puesto['puesto'];
@@ -113,44 +114,44 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
     $HorasExtra = $CountTExtra * $Empleado['sueldo_diario'];
     $DescuentoRetardos = $CountRetardos * 20;
     $DescuentoFaltas = $CountFaltas * $Empleado['sueldo_diario'];
-    $TotalDescuentos = $Caja['caja_ahorro'] + $Prestamo['descuento_semana'] + $Infonavit['descuento'] + $DescuentoFaltas + $DescuentoRetardos;
+    $TotalDescuentos = $DesCajaAhorro + $DesPrestamo + $DesInfonavit + $DescuentoFaltas + $DescuentoRetardos;
     $Neto = $Empleado['complemento'] - $TotalDescuentos;
-    $TotalNeto = round($Neto + $HorasExtra + $Bono['bono']);
+    $TotalNeto = round($Neto + $HorasExtra + $BonoEmpleado);
 
     echo '
     <div class="container-fluid ">
         <img src="http://localhost/Nomina/assets/img/Logo/logo.png" />
         <div class="row" style="height: 3.5rem;">
             <div class="col-8">
-                <h1 class="display-4 text-left"><strong>'.$NomCedis.'</strong></h1>
+                <h1 class="display-4 text-left"><strong>' . $NomCedis . '</strong></h1>
             </div>
             <div class="col-4 offset-8 text-right">
-                <h1 class="display-4 text-right" style="color: crimson;"><strong>Nº EMPLEADO: '.$NumeroEmpleado.'</strong></h1>
+                <h1 class="display-4 text-right" style="color: crimson;"><strong>Nº EMPLEADO: ' . $NumeroEmpleado . '</strong></h1>
             </div>
         </div>
         <div class="row" style="height: 2.5rem;">
             <div class="col-4">
                 <a class="display-1">
-                    '.$DirCedis.'
+                    ' . $DirCedis . '
                     <br />
-                    COL '.$ColCedis.', C.P. '.$CPCedis.'
+                    COL ' . $ColCedis . ', C.P. ' . $CPCedis . '
                     <br />
-                    RFC. '.$RFCCedis.'
+                    RFC. ' . $RFCCedis . '
                     <br />
                 </a>
             </div>
             <div class="col-4 offset-4 text-right">
                 <a class="display-1">
                     <b>DIA DE PAGO:</b>
-                    <br>'.$fecha_viernes.'
+                    <br>' . $fecha_viernes . '
                     <br>
                 </a>
             </div>
             <div class="col-4 offset-8 text-right">
                 <a class="display-1">
                     <b>PERIODO DE PAGO:</b>
-                    <br>Del: '.$fecha_lunes.'
-                    <br>Al: '.$fecha_sabado.'
+                    <br>Del: ' . $fecha_lunes . '
+                    <br>Al: ' . $fecha_sabado . '
                     <br>
                 </a>
             </div>
@@ -176,9 +177,9 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 </div>
                 <div class="col-6 offset-1">
                     <a class="display-1">
-                        '.$NombreEmpleado.'
+                        ' . $NombreEmpleado . '
                         <br />
-                        '.$PuestoEmpleado.'
+                        ' . $PuestoEmpleado . '
                         <br />
                     </a>
                 </div>
@@ -194,11 +195,11 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 </div>
                 <div class="col-2 offset-10">
                     <a class="display-1">
-                        $ '.$SalarioDiario.'
+                        $ ' . $SalarioDiario . '
                         <br />
-                        '.$CountAsistencias.' dias.
+                        ' . $CountAsistencias . ' dias.
                         <br />
-                        $ '.$Deposito.'
+                        $ ' . $Deposito . '
                         <br />
                     </a>
                 </div>
@@ -215,25 +216,25 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                                 <br />
                                 <b>Complemento:</b>
                                 <br />
-                                <b>Incapacidad:</b>
+                                <!--<b>Incapacidad:</b>-->
                                 <br />
-                                <b>Horas Extra:</b>
+                                <!--<b>Horas Extra:</b>-->
                                 <br />
-                                <b>Bono:</b>
+                                <!--<b>Bono:</b>-->
                                 <br />
                             </a>
                         </div>
                         <div class="col-9 offset-3">
                             <a class="display-1">
-                                $ '.$Deposito.'
+                                $ ' . $Deposito . '
                                 <br />
-                                $ '.$Salario.'
+                                $ ' . $Salario . '
                                 <br />
-                                $ '.$Incapacidad.'
+                                <!--$ ' . $Incapacidad . '-->
                                 <br />
-                                $ '.$HorasExtra.'
+                                <!--$ ' . $HorasExtra . '-->
                                 <br />
-                                $ '.$BonoEmpleado.'
+                                <!--$ ' . $BonoEmpleado . '-->
                                 <br />
                             </a>
                         </div>
@@ -246,29 +247,29 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                     <div class="row">
                         <div class="col-3">
                             <a class="display-1">
-                                <b>Caja Ahorro:</b>
-                                <br />
-                                <b>Infonavit:</b>
-                                <br />
-                                <b>Prestamo:</b>
-                                <br />
                                 <b>Retardos:</b>
                                 <br />
                                 <b>Faltas:</b>
+                                <br />
+                                <!--<b>Caja Ahorro:</b>-->
+                                <br />
+                                <!--<b>Infonavit:</b>-->
+                                <br />
+                                <!--<b>Prestamo:</b>-->
                                 <br />
                             </a>
                         </div>
                         <div class="col-9 offset-3">
                             <a class="display-1">
-                                $ '.$DesCajaAhorro.'
+                                $ ' . $DescuentoRetardos . '
                                 <br />
-                                $ '.$DesInfonavit.'
+                                $ ' . $DescuentoFaltas . '
                                 <br />
-                                $ '.$DesPrestamo.'
+                                <!--$ ' . $DesCajaAhorro . '-->
                                 <br />
-                                $ '.$DescuentoRetardos.'
+                                <!--$ ' . $DesInfonavit . '-->
                                 <br />
-                                $ '.$DescuentoFaltas.'
+                                <!--$ ' . $DesPrestamo . '-->
                                 <br />
                             </a>
                         </div>
@@ -281,7 +282,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 <fieldset class="border p-2" style="height: 1rem;">
                     <legend class="w-auto"><a class="display-1"><strong>Neto en letra:</strong></a></legend>
                     <a class="display-1">
-                        '.convertir($TotalNeto).'
+                        ' . convertir($TotalNeto) . '
                         <br />
                     </a>
                 </fieldset>
@@ -290,7 +291,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 <fieldset class="border p-2" style="height: 1rem;">
                     <legend class="w-auto"><a class="display-1"><strong>Neto Recibido:</strong></a></legend>
                     <a class="display-2">
-                        $ '.$TotalNeto.'
+                        $ ' . $TotalNeto . '
                         <br />
                     </a>
                 </fieldset>
@@ -302,7 +303,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
             <div class="col-6 offset-6 text-center">
                 <a class="display-1">
                     <br>____________________________________
-                    <br>'.$NombreEmpleado.'
+                    <br>' . $NombreEmpleado . '
                     <br><b>Firma</b>
                     <br>
                     <br>
@@ -318,35 +319,35 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
         <img src="http://localhost/Nomina/assets/img/Logo/logo.png" />
         <div class="row" style="height: 3.5rem;">
             <div class="col-8">
-                <h1 class="display-4 text-left"><strong>'.$NomCedis.'</strong></h1>
+                <h1 class="display-4 text-left"><strong>' . $NomCedis . '</strong></h1>
             </div>
             <div class="col-4 offset-8 text-right">
-                <h1 class="display-4 text-right" style="color: crimson;"><strong>Nº EMPLEADO: '.$NumeroEmpleado.'</strong></h1>
+                <h1 class="display-4 text-right" style="color: crimson;"><strong>Nº EMPLEADO: ' . $NumeroEmpleado . '</strong></h1>
             </div>
         </div>
         <div class="row" style="height: 2.5rem;">
             <div class="col-4">
                 <a class="display-1">
-                    '.$DirCedis.'
+                    ' . $DirCedis . '
                     <br />
-                    COL '.$ColCedis.', C.P. '.$CPCedis.'
+                    COL ' . $ColCedis . ', C.P. ' . $CPCedis . '
                     <br />
-                    RFC. '.$RFCCedis.'
+                    RFC. ' . $RFCCedis . '
                     <br />
                 </a>
             </div>
             <div class="col-4 offset-4 text-right">
                 <a class="display-1">
                     <b>DIA DE PAGO:</b>
-                    <br>'.$fecha_viernes.'
+                    <br>' . $fecha_viernes . '
                     <br>
                 </a>
             </div>
             <div class="col-4 offset-8 text-right">
                 <a class="display-1">
                     <b>PERIODO DE PAGO:</b>
-                    <br>Del: '.$fecha_lunes.'
-                    <br>Al: '.$fecha_sabado.'
+                    <br>Del: ' . $fecha_lunes . '
+                    <br>Al: ' . $fecha_sabado . '
                     <br>
                 </a>
             </div>
@@ -372,9 +373,9 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 </div>
                 <div class="col-6 offset-1">
                     <a class="display-1">
-                        '.$NombreEmpleado.'
+                        ' . $NombreEmpleado . '
                         <br />
-                        '.$PuestoEmpleado.'
+                        ' . $PuestoEmpleado . '
                         <br />
                     </a>
                 </div>
@@ -390,11 +391,11 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 </div>
                 <div class="col-2 offset-10">
                     <a class="display-1">
-                        $ '.$SalarioDiario.'
+                        $ ' . $SalarioDiario . '
                         <br />
-                        '.$CountAsistencias.' dias.
+                        ' . $CountAsistencias . ' dias.
                         <br />
-                        $ '.$Deposito.'
+                        $ ' . $Deposito . '
                         <br />
                     </a>
                 </div>
@@ -411,25 +412,25 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                                 <br />
                                 <b>Complemento:</b>
                                 <br />
-                                <b>Incapacidad:</b>
+                                <!--<b>Incapacidad:</b>-->
                                 <br />
-                                <b>Horas Extra:</b>
+                                <!--<b>Horas Extra:</b>-->
                                 <br />
-                                <b>Bono:</b>
+                                <!--<b>Bono:</b>-->
                                 <br />
                             </a>
                         </div>
                         <div class="col-9 offset-3">
                             <a class="display-1">
-                                $ '.$Deposito.'
+                                $ ' . $Deposito . '
                                 <br />
-                                $ '.$Salario.'
+                                $ ' . $Salario . '
                                 <br />
-                                $ '.$Incapacidad.'
+                                <!--$ ' . $Incapacidad . '-->
                                 <br />
-                                $ '.$HorasExtra.'
+                                <!--$ ' . $HorasExtra . '-->
                                 <br />
-                                $ '.$BonoEmpleado.'
+                                <!--$ ' . $BonoEmpleado . '-->
                                 <br />
                             </a>
                         </div>
@@ -442,29 +443,29 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                     <div class="row">
                         <div class="col-3">
                             <a class="display-1">
-                                <b>Caja Ahorro:</b>
-                                <br />
-                                <b>Infonavit:</b>
-                                <br />
-                                <b>Prestamo:</b>
-                                <br />
                                 <b>Retardos:</b>
                                 <br />
                                 <b>Faltas:</b>
+                                <br />
+                                <!--<b>Caja Ahorro:</b>-->
+                                <br />
+                                <!--<b>Infonavit:</b>-->
+                                <br />
+                                <!--<b>Prestamo:</b>-->
                                 <br />
                             </a>
                         </div>
                         <div class="col-9 offset-3">
                             <a class="display-1">
-                                $ '.$DesCajaAhorro.'
+                                $ ' . $DescuentoRetardos . '
                                 <br />
-                                $ '.$DesInfonavit.'
+                                $ ' . $DescuentoFaltas . '
                                 <br />
-                                $ '.$DesPrestamo.'
+                                <!--$ ' . $DesCajaAhorro . '-->
                                 <br />
-                                $ '.$DescuentoRetardos.'
+                                <!--$ ' . $DesInfonavit . '-->
                                 <br />
-                                $ '.$DescuentoFaltas.'
+                                <!--$ ' . $DesPrestamo . '-->
                                 <br />
                             </a>
                         </div>
@@ -477,7 +478,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 <fieldset class="border p-2" style="height: 1rem;">
                     <legend class="w-auto"><a class="display-1"><strong>Neto en letra:</strong></a></legend>
                     <a class="display-1">
-                        '.convertir($TotalNeto).'
+                        ' . convertir($TotalNeto) . '
                         <br />
                     </a>
                 </fieldset>
@@ -486,7 +487,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
                 <fieldset class="border p-2" style="height: 1rem;">
                     <legend class="w-auto"><a class="display-1"><strong>Neto Recibido:</strong></a></legend>
                     <a class="display-2">
-                        $ '.$TotalNeto.'
+                        $ ' . $TotalNeto . '
                         <br />
                     </a>
                 </fieldset>
@@ -498,7 +499,7 @@ while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
             <div class="col-6 offset-6 text-center">
                 <a class="display-1">
                     <br>____________________________________
-                    <br>'.$NombreEmpleado.'
+                    <br>' . $NombreEmpleado . '
                     <br><b>Firma</b>
                     <br>
                     <br>
@@ -516,13 +517,3 @@ echo '
 
 </html>
 ';
-
-?>
-
-
-    
-
-    
-
-
-

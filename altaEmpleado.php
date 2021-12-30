@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Alta Empleado</title>
+    <title> Nómina | Alta Empleado</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -23,14 +23,14 @@ include("assets/controler/conexion.php"); ?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
-                        <h1>
+                        <h3>
                             <center>Alta de empleados</center>
-                        </h1>
+                        </h3>
                         <form class="form" id="cleanForm" action="assets/controler/empleado/altaEmp.php" method="POST">
 
                             <!-- form empleado -->
@@ -41,7 +41,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Numero de Empleado -->
                                     <div class="col-4">
                                         <label>Numero de Empleado:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-hashtag"></i>
@@ -54,7 +54,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo apellido paterno -->
                                     <div class="col-4">
                                         <label>Apellido paterno:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-user-alt"></i>
@@ -67,7 +67,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo apellido materno -->
                                     <div class="col-4">
                                         <label>Apellido materno:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-user-alt"></i>
@@ -80,7 +80,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Nombres -->
                                     <div class="col-6">
                                         <label>Nombres:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-user-alt"></i>
@@ -93,7 +93,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Domicilio -->
                                     <div class="col-6">
                                         <label>Domicilio:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-address-book"></i>
@@ -106,7 +106,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Colonia -->
                                     <div class="col-3">
                                         <label>Colonia:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-address-book"></i>
@@ -119,7 +119,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Codigo postal -->
                                     <div class="col-3">
                                         <label>Codigo postal:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map-marker-alt"></i>
@@ -132,7 +132,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Ciudad -->
                                     <div class="col-3">
                                         <label>Ciudad:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map-marker-alt"></i>
@@ -145,7 +145,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Estado -->
                                     <div class="col-3">
                                         <label>Estado:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map-marker-alt"></i>
@@ -164,7 +164,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo NSS -->
                                     <div class="col-4">
                                         <label>NSS:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-id-card-alt"></i>
@@ -177,7 +177,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo RFC -->
                                     <div class="col-4">
                                         <label>RFC:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-id-card-alt"></i>
@@ -190,7 +190,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo CURP -->
                                     <div class="col-4">
                                         <label>CURP:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-id-card-alt"></i>
@@ -209,7 +209,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo sexo -->
                                     <div class="col-4">
                                         <label>Sexo:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-restroom"></i>
@@ -226,7 +226,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo fecha nacimiento -->
                                     <div class="col-4">
                                         <label>Fecha nacimiento:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-calendar-alt"></i>
@@ -239,7 +239,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo pais nacimiento -->
                                     <div class="col-4">
                                         <label>Pais nacimiento:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map"></i>
@@ -252,7 +252,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo estado nacimiento -->
                                     <div class="col-4">
                                         <label>Estado nacimiento:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map"></i>
@@ -265,7 +265,7 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo ciudad nacimiento -->
                                     <div class="col-4">
                                         <label>Ciudad nacimiento:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-map"></i>
@@ -278,13 +278,21 @@ include("assets/controler/conexion.php"); ?>
                                     <!--Campo Estado civil -->
                                     <div class="col-4">
                                         <label>Estado civil:</label>
-                                        <div class="input-group ">
+                                        <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-house-user"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Estado civil" name="form_estado_civil" required>
+                                            <select name="form_estado_civil" class="custom-select" required>
+                                                <option value="" selected disabled>Seleccione</option>
+                                                <option value="Soltero-Soltera">Soltero / Soltera</option>
+                                                <option value="Casado-Casada">Casado / Casada</option>
+                                                <option value="Divorciado-Divorciado">Divorciado / Divorciada</option>
+                                                <option value="Viudo-Viudo">Viudo / Viuda </option>
+                                                <option value="Concubinato">Concubinato</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -317,9 +325,7 @@ include("assets/controler/conexion.php"); ?>
 
             </div>
 
-            <!-- footer -->
-            <?php include("assets/common/foter.php"); ?>
-            <!-- End of footer -->
+
 
         </div>
         <!-- /#page-content-wrapper -->
@@ -328,6 +334,10 @@ include("assets/controler/conexion.php"); ?>
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- footer -->
+    <?php include("assets/common/foter.php"); ?>
+    <!-- End of footer -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

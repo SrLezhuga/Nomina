@@ -4,7 +4,7 @@
 <meta name="description" content="">
 <meta name="author" content="Lechuga">
 
-<link rel="icon" href="assets/img/Logo/MFA.ico" />
+<link rel="icon" href="assets/img/Logo/logo.ico" />
 
 <!-- Custom fonts for this template-->
 <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,13 +32,10 @@
 <script src="assets/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="assets/vendor/chart.js/Chart.js"></script>
 <script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="assets/js/demo/chart-area-demo.js"></script>
-<script src="assets/js/demo/chart-pie-demo.js"></script>
 <script src="assets/js/demo/code.js"></script>
 <script src="assets/vendor/toastr/toastr.min.js"></script>
 <script src="assets/js/demo/datatables-demo.js"></script>

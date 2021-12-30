@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Lista Seguro</title>
+    <title> Nómina  | Lista Seguro</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -26,7 +26,7 @@ include("assets/controler/conexion.php"); ?>
             <div class="container">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h1>
                             <center>Lista seguro</center>

@@ -6,7 +6,7 @@ date_default_timezone_set("America/Mexico_City");?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Capturar</title>
+    <title> Nómina  | Capturar</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -25,10 +25,10 @@ date_default_timezone_set("America/Mexico_City");?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h1>
                             <center>Captura Asistencia</center>
@@ -37,7 +37,7 @@ date_default_timezone_set("America/Mexico_City");?>
                             <legend class='w-auto'>Capturar asistencias:</legend>
                             <div class="row">
                                 <div class="col-4">
-                                    <div class="input-group ">
+                                    <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <i class="far fa-calendar-alt"></i>
@@ -48,12 +48,12 @@ date_default_timezone_set("America/Mexico_City");?>
                                 </div>
                                 <div class="col-4">
                                     <div class="input-group ">
-                                        <button type="button" class="btn btn-outline-secondary btn-block" onclick="CargarAsistencias()"><i class="fas fa-database"></i> Cargar Datos</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-block" onclick="CargarAsistencias()"><i class="fas fa-database"></i> Cargar Datos</button>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="input-group ">
-                                        <button type="button" class="btn btn-outline-danger btn-block " onclick="RegistrarAsistencias()" disabled id="btn_registrar"><i class="fas fa-save"></i> Guardar Datos</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-block " onclick="RegistrarAsistencias()" disabled id="btn_registrar"><i class="fas fa-save"></i> Guardar Datos</button>
                                     </div>
                                 </div>
                             </div>

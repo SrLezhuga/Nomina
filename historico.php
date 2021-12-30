@@ -6,7 +6,7 @@ date_default_timezone_set("America/Mexico_City");?>
 <html lang="es">
 
 <head>
-    <title> Nomina MFA | Asistencias</title>
+    <title> Nómina  | Asistencias</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -25,10 +25,10 @@ date_default_timezone_set("America/Mexico_City");?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
-                <div class="card border-left-pink shadow ">
+                <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h2>
                             <center>Tabla de asistencias</center>
