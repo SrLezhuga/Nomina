@@ -105,9 +105,20 @@ include("assets/controler/conexion.php"); ?>
 
                             <div class="row">
                                 <div class="col-6 offset-6">
-                                    <button type="button" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+
+                                    <form class="form" id="cleanForm" action="assets/controler/reportes/reporteAsistencia.php" method="POST" target="_blank">
+                                        <input type="text" class="form-control" name="form_empleado" id="form_empleado" value="">
+                                        <input type="text" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
+                                        <input type="text" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
+
+                                        <div class="input-group ">
+                                            <button type="submit"  class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
+
 
                             <!--/. form-->
                         </fieldset>
@@ -198,6 +209,10 @@ include("assets/controler/conexion.php"); ?>
                     $("#loadtable").append(data);
                     $("#btn_generar_pdf").prop("disabled", false);
                     loadTable();
+
+                    $('#form_empleado').val(empleado);
+                    $('#form_fecha_in').val(fecha_inicio);
+                    $('#form_fecha_out').val(fecha_fin);
 
                 }
             });

@@ -105,7 +105,21 @@ include("assets/controler/conexion.php"); ?>
 
                             <div class="row">
                                 <div class="col-6 offset-6">
-                                    <button type="button" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+
+                                    <form class="form" id="cleanForm" action="assets/controler/reportes/nomina.php" method="POST" target="_blank">
+                                        <input type="text" class="form-control" name="form_empleado" id="form_empleado" value="">
+                                        <input type="text" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
+                                        <input type="text" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
+
+
+                                        <div class="input-group ">
+                                            <button type="submit" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+
+                                            <button type="submit" class="btn btn-sm btn-outline-danger btn-block" id="btn_crear_nomina" disabled><i class="fas fa-file-pdf"></i> Crear Nómina</button>
+                                        </div>
+                                    </form>
+
+                                    <button type="submit" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
                                 </div>
                             </div>
 

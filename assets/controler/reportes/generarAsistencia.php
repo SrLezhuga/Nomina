@@ -1,8 +1,15 @@
 <?php
 include("../conexion.php");
 
-$fecha_inicio = 
-$fecha_fin =
+$fecha_inicio = $_SESSION['form_fecha_in'];
+$fecha_fin = $_SESSION['form_fecha_out'];
+$empleado = $_SESSION['form_empleado'];
+
+if ($empleado == 'TODOS') {
+    $condicion = '';
+} else {
+    $condicion = "id_empleado = '$empleado' AND";
+}
 
 $queryEmpleado = "SELECT * FROM tab_asistencia WHERE $condicion fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $rsEmpleado = mysqli_query($con, $queryEmpleado) or die("Error de consulta");
@@ -22,50 +29,39 @@ echo '
             <div class="container-fluid">
             <h1 class="display-4 text-center"><strong>ESCUELA NORMAL RURAL MIGUEL HIDALGO</strong></h1>
                 <br>
-                <h1 class="display-2 text-center"><strong>REPORTE DE EMPLEADOS</strong></h1>
-                <div class="row" style="height: 6rem;">
+                <h1 class="display-2 text-center"><strong>REPORTE DE ASISTENCIAS</strong></h1>
+                <div class="row col-12" style="height: 6rem;">
                             <table class="table table-borderless table-sm table-striped table-dark"  width="100%" cellspacing="0">
                                 <thead class="thead-dark">
                                 <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Puesto</th>
-                                <th>Supervisor</th>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Fin</th>
-                                <th>Turno</th>
-                                <th>Status </th>
-                            </tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Status </th>
+                                </tr>
                                 </thead>
                                 <tbody>';
 
 $i = 0;
 
 while ($Empleado = mysqli_fetch_array($rsEmpleado)) {
-    $queryNombre = "SELECT concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado FROM tab_empleado WHERE id_empleado = '" . $Empleado['id_empleado'] . "'";
-    $rsNombre = mysqli_query($con, $queryNombre) or die("Error de consulta");
-    $Nombre = mysqli_fetch_array($rsNombre);
 
+    if ($Empleado['status'] == 1) {
+        $status = 'Asistencia';
+    } else {
+        $status = 'Falta';
+    }
+
+    $item[$i]['status'] = $status;
     $item[$i]['id_empleado'] = $Empleado['id_empleado'];
-    $item[$i]['nom_empleado'] = $Nombre['nom_empleado'];
-    $item[$i]['puesto'] = $Empleado['puesto'];
-    $item[$i]['nombre_supervisor'] = $Empleado['nombre_supervisor'];
-    $item[$i]['fecha_contrato'] = $Empleado['fecha_contrato'];
-    $item[$i]['fecha_fin_contrato'] = $Empleado['fecha_fin_contrato'];
-    $item[$i]['turno'] = $Empleado['turno'];
-    $item[$i]['status'] = $Empleado['status'];
-
-
+    $item[$i]['nom_empleado'] = $Empleado['nom_empleado'];
+    $item[$i]['fecha'] = $Empleado['fecha'];
 
     echo '
         <tr>
             <td>' . $item[$i]['id_empleado'] . '</td>
             <td>' . $item[$i]['nom_empleado'] . '</td>
-            <td>' . $item[$i]['puesto'] . '</td>
-            <td>' . $item[$i]['nombre_supervisor'] . '</td>
-            <td>' . $item[$i]['fecha_contrato'] . '</td>
-            <td>' . $item[$i]['fecha_fin_contrato'] . '</td>
-            <td>' . $item[$i]['turno'] . '</td>
+            <td>' . $item[$i]['fecha'] . '</td>
             <td>' . $item[$i]['status'] . '</td>
         </tr> ';
     $i++;

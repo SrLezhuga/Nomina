@@ -118,7 +118,7 @@ $Empleado = mysqli_fetch_array($rsEmpleado);
 
     echo '
     <div class="container-fluid ">
-        <img src="http://localhost/Nomina/assets/img/Logo/logo.png" />
+        <img class="img-l" src="http://localhost/Nomina/assets/img/Logo/logo.png" />
         <div class="row" style="height: 3.5rem;">
             <div class="col-8">
                 <h1 class="display-4 text-left"><strong>'.$NomCedis.'</strong></h1>
@@ -314,7 +314,7 @@ $Empleado = mysqli_fetch_array($rsEmpleado);
     <br>
     <br>
     <div class="container-fluid img">
-        <img src="http://localhost/Nomina/assets/img/Logo/logo.png" />
+        <img class="img-l" src="http://localhost/Nomina/assets/img/Logo/logo.png" />
         <div class="row" style="height: 3.5rem;">
             <div class="col-8">
                 <h1 class="display-4 text-left"><strong>'.$NomCedis.'</strong></h1>
