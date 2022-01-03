@@ -29,7 +29,7 @@ include("assets/controler/conexion.php"); ?>
                 <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
                     <div class="card-body">
                         <h1>
-                            <center>Reportes Asistencias</center>
+                            <center>Reportes Faltas</center>
                         </h1>
                         <fieldset class='border p-2'>
                             <legend class='w-auto'>Datos del reporte:</legend>
@@ -48,11 +48,6 @@ include("assets/controler/conexion.php"); ?>
                                         <select name="formEmpleado" id="formEmpleado" class="mi-selector custom-select">
                                             <option value="" selected disabled>Seleccione datos del empleado</option>
                                             <option value="TODOS">000 | Todos los empleados</option>
-                                            <?php $listEmp = "SELECT id_empleado, concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) as nombre, status_empleado FROM nomina.tab_empleado ORDER BY apellido_pat_empleado ASC";
-                                            $rsEmp = mysqli_query($con, $listEmp) or die("Error de consulta");
-                                            while ($itemEmp = mysqli_fetch_array($rsEmp)) {
-                                                echo "<option value='" . $itemEmp['id_empleado'] . "'>" . $itemEmp['id_empleado'] . " | " . $itemEmp['nombre'] .  "</option>";
-                                            } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -72,7 +67,7 @@ include("assets/controler/conexion.php"); ?>
                                 <div class="col-2">
                                     <label>Consultar:</label>
                                     <div class="input-group ">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-block" onclick="CargarAsistencias()"><i class="fas fa-database"></i> Cargar Datos</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-block" onclick="CargarFaltas()"><i class="fas fa-database"></i> Cargar Datos</button>
                                     </div>
                                 </div>
                             </div>
@@ -106,22 +101,18 @@ include("assets/controler/conexion.php"); ?>
                             <div class="row">
                                 <div class="col-6 offset-6">
 
-                                    <form class="form" id="cleanForm" action="assets/controler/reportes/nomina.php" method="POST" target="_blank">
-                                        <input type="text" class="form-control" name="form_empleado" id="form_empleado" value="">
-                                        <input type="text" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
-                                        <input type="text" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
-
+                                    <form class="form" id="cleanForm" action="assets/controler/reportes/reporteFalta.php" method="POST" target="_blank">
+                                        <input type="hidden" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
+                                        <input type="hidden" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
 
                                         <div class="input-group ">
-                                            <button type="submit" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
-
-                                            <button type="submit" class="btn btn-sm btn-outline-danger btn-block" id="btn_crear_nomina" disabled><i class="fas fa-file-pdf"></i> Crear Nómina</button>
+                                            <button type="submit"  class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
                                         </div>
                                     </form>
 
-                                    <button type="submit" onClick=clean() class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
                                 </div>
                             </div>
+
 
                             <!--/. form-->
                         </fieldset>
@@ -171,7 +162,7 @@ include("assets/controler/conexion.php"); ?>
         }
 
 
-        function CargarAsistencias() {
+        function CargarFaltas() {
             var formData = new FormData();
 
             var empleado = $('#formEmpleado').val();
@@ -202,7 +193,7 @@ include("assets/controler/conexion.php"); ?>
 
             $.ajax({
                 type: "POST",
-                url: "assets/controler/reportes/rep_asistencia.php",
+                url: "assets/controler/reportes/rep_falta.php",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -213,35 +204,14 @@ include("assets/controler/conexion.php"); ?>
                     $("#btn_generar_pdf").prop("disabled", false);
                     loadTable();
 
-                }
-            });
-
-
-        }
-
-        function crearPDF() {
-            var fecha_inicio = $('#form_inicio').val();
-            var fecha_fin = $('#form_fin').val();
-
-            var URL = 'assets/controler/reportes/rep_asistencia.php';
-
-            window.open(URL, '_blank');
-
-            $.ajax({
-                type: "POST",
-                url: "assets/controler/reportes/rep_asistencia.php",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-
-                    $('#loadtable').empty();
-                    $("#loadtable").append(data);
-                    $("#btn_generar_pdf").prop("disabled", false);
-                    loadTable();
+                    $('#form_empleado').val(empleado);
+                    $('#form_fecha_in').val(fecha_inicio);
+                    $('#form_fecha_out').val(fecha_fin);
 
                 }
             });
+
+
         }
 
         function loadTable() {

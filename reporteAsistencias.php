@@ -107,9 +107,9 @@ include("assets/controler/conexion.php"); ?>
                                 <div class="col-6 offset-6">
 
                                     <form class="form" id="cleanForm" action="assets/controler/reportes/reporteAsistencia.php" method="POST" target="_blank">
-                                        <input type="text" class="form-control" name="form_empleado" id="form_empleado" value="">
-                                        <input type="text" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
-                                        <input type="text" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
+                                        <input type="hidden" class="form-control" name="form_empleado" id="form_empleado" value="">
+                                        <input type="hidden" class="form-control" name="form_fecha_in" id="form_fecha_in" value="">
+                                        <input type="hidden" class="form-control" name="form_fecha_out" id="form_fecha_out" value="">
 
                                         <div class="input-group ">
                                             <button type="submit"  class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
@@ -218,31 +218,6 @@ include("assets/controler/conexion.php"); ?>
             });
 
 
-        }
-
-        function crearPDF() {
-            var fecha_inicio = $('#form_inicio').val();
-            var fecha_fin = $('#form_fin').val();
-
-            var URL = 'assets/controler/reportes/rep_asistencia.php';
-
-            window.open(URL, '_blank');
-
-            $.ajax({
-                type: "POST",
-                url: "assets/controler/reportes/rep_asistencia.php",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-
-                    $('#loadtable').empty();
-                    $("#loadtable").append(data);
-                    $("#btn_generar_pdf").prop("disabled", false);
-                    loadTable();
-
-                }
-            });
         }
 
         function loadTable() {
