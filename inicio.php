@@ -38,23 +38,31 @@ date_default_timezone_set("America/Mexico_City");
                         <div class="row">
                             <div class="col-6">
                                 <fieldset class='border p-2'>
-                                    <legend class='w-auto'><?php echo $hoy = date('Y-m-d'); ?></legend>
+                                    <legend class='w-auto'><?php echo $hoy = date('Y-m-d'); echo $f_month = date('m'); echo $f_day = date('d') ?></legend>
+                                    <!-- Anuncios Hoy -->
+
                                     <?php
+                                    //Cumpleaños
+                                    $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nombre, fecha_nacimiento_empleado FROM tab_empleado WHERE fecha_nacimiento_empleado = month($f_month) AND fecha_nacimiento_empleado = day($f_day);";
+                                    $rsCumpleHoy = mysqli_query($con, $queryCumpleHoy) or die(mysqli_error($con));
+                                    $CumpleHoy = mysqli_fetch_array($rsCumpleHoy);
 
-                                    $queryRenovacion = "SELECT concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado FROM tab_empleado AS e
-                                    JOIN tab_puesto AS p
-                                    ON e.id_empleado = p.id_empleado
-                                    WHERE nuevo_contrato = '" . $hoy . "'";
-                                    $rsRenovacion = mysqli_query($con, $queryRenovacion) or die("Error de consulta");
-                                    $Renovacion = mysqli_fetch_array($rsRenovacion);
-
-                                    while ($Renovacion = mysqli_fetch_array($rsRenovacion)) {
+                                    if (empty($CumpleHoy['nombre'])) {
                                         echo '
-                                            <div class="alert alert-primary alert-dismissible">
+                                            <div class="alert alert-success alert-dismissible">
                                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                <strong>' . $Renovacion['nom_empleado'] . '</strong><br>Necesita renovar contrato!
+                                                <strong>No hay cumpleaños que celebrar hoy.</strong>
                                             </div>
-                                            ';
+                                        ';
+                                    } else {
+                                        while ($CumpleHoy = mysqli_fetch_array($rsCumpleHoy)) {
+                                            echo '
+                                                <div class="alert alert-primary alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>' . $CumpleHoy['nom_empleado'] . '</strong><br>Cumple años el dia de hoy!
+                                                </div>
+                                                ';
+                                        }
                                     }
 
                                     ?>
@@ -63,20 +71,32 @@ date_default_timezone_set("America/Mexico_City");
                             <div class="col-6">
                                 <fieldset class='border p-2'>
                                     <legend class='w-auto'><?php echo $manana = date('Y-m-d', strtotime("+ 1 days")); ?></legend>
+
+                                    <!-- Anuncios Mañana -->
                                     <?php
-                                    $queryRenovacion = "SELECT concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado FROM tab_empleado AS e
-                                    JOIN tab_puesto AS p
-                                    ON e.id_empleado = p.id_empleado
-                                    WHERE nuevo_contrato = '" . $manana . "'";
-                                    $rsRenovacion = mysqli_query($con, $queryRenovacion) or die("Error de consulta");
-                                    while ($Renovacion = mysqli_fetch_array($rsRenovacion)) {
+                                    //Cumpleaños
+                                    $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nombre, fecha_nacimiento_empleado FROM tab_empleado WHERE fecha_nacimiento_empleado = NOW() + INTERVAL 1 DAY;";
+                                    $rsCumpleHoy = mysqli_query($con, $queryCumpleHoy) or die(mysqli_error($con));
+                                    $CumpleHoy = mysqli_fetch_array($rsCumpleHoy);
+
+                                    if (empty($CumpleHoy['nombre'])) {
                                         echo '
-                                        <div class="alert alert-primary alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                            <strong>' . $Renovacion['nom_empleado'] . '</strong><br>Vencerá su contrato!
-                                        </div>
+                                            <div class="alert alert-success alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                <strong>No hay cumpleaños que celebrar.</strong>
+                                            </div>
                                         ';
+                                    } else {
+                                        while ($CumpleHoy = mysqli_fetch_array($rsCumpleHoy)) {
+                                            echo '
+                                                <div class="alert alert-primary alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>' . $CumpleHoy['nom_empleado'] . '</strong><br>Cumple años mañana!
+                                                </div>
+                                                ';
+                                        }
                                     }
+
                                     ?>
                                 </fieldset>
 

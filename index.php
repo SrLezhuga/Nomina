@@ -60,8 +60,8 @@
                                             <input type="password" class="form-control form-control-lg" name="formPass" placeholder="Contraseña" aria-describedby="passwordHelpInline" required>
                                         </div>
                                         <br>
-                                        <a href="inicio" class="btn  btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</a>
-                                        <!-- <button type="submit" class="btn btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</button>-->
+                                       <!-- <a href="inicio" class="btn  btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</a>-->
+                                        <button type="submit" class="btn btn-outline-pink btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Inicio Sesión</button>
                                     </form>
                                 </div>
                             </div>
