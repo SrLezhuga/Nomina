@@ -43,7 +43,8 @@ date_default_timezone_set("America/Mexico_City");
 
                                     <?php
                                     //Cumpleaños
-                                    $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nombre, fecha_nacimiento_empleado FROM tab_empleado WHERE fecha_nacimiento_empleado = month($f_month) AND fecha_nacimiento_empleado = day($f_day);";
+                                   echo $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado, Date_format(fecha_nacimiento_empleado,'%d') AS Dia, Date_format(fecha_nacimiento_empleado,'%m') AS Mes FROM tab_empleado
+                                    WHERE Date_format(fecha_nacimiento_empleado,'%d') = $f_day AND Date_format(fecha_nacimiento_empleado,'%m') = $f_month;";
                                     $rsCumpleHoy = mysqli_query($con, $queryCumpleHoy) or die(mysqli_error($con));
                                     $CumpleHoy = mysqli_fetch_array($rsCumpleHoy);
 

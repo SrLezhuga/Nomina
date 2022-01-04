@@ -10,12 +10,11 @@ $emp_sueldo              = $_POST['form_sueldo'];
 
 // Consulta segura para evitar inyecciones SQL.
 
-$sql = "INSERT INTO tab_seguro VALUES ('$emp_numero', '$emp_seguro', $emp_sueldo, 'VIGENTE');";
+$sql = "INSERT INTO tab_seguro VALUES ('$emp_numero', '$emp_seguro', '$emp_sueldo', 'VIGENTE');";
 
 if (mysqli_query($con, $sql)) {
 
-    header("HTTP/1.0 404 Not Found");
-    header("Location: http://" . $_SERVER['HTTP_HOST'] . "/Nomina/altaImss?alert=0'");
+    header("Location: http://" . $_SERVER['HTTP_HOST'] . "/Nomina/altaIssste?alert=0'");
 }
 
 // close connection
