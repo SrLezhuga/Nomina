@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nómina  | Buscar Empleados</title>
+    <title> Nómina | Buscar Empleados</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -48,7 +48,7 @@ include("assets/controler/conexion.php"); ?>
                                                         <i class="fas fa-hashtag"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control validar" placeholder="Número Empelado" id="demo" name="folio" pattern='[0-9]{5}' title="Folio: XXXXX" required>
+                                                <input type="text" class="form-control validar" placeholder="Número Empelado" id="Empleado" name="Empleado" pattern='[0-9]{5}' title="Empleado: XXXXX" required>
                                             </div>
                                         </div>
                                         <!--Campo Cliente -->
@@ -92,11 +92,11 @@ include("assets/controler/conexion.php"); ?>
 
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <button type="button" onClick=clean() class="btn btn-outline-secondary btn-block" disabled id="btn_clear"><i class="fas fa-eraser"></i> Borrar</button>
+                                                        <button type="button" onclick=clean() class="btn btn-outline-secondary btn-block" disabled id="btn_clear"><i class="fas fa-eraser"></i> Borrar</button>
                                                     </div>
                                                     <br>
                                                     <div class="col-6">
-                                                        <button type="submit" class="btn btn-outline-pink btn-block" disabled id="btn_detalles"><i class="fas fa-user-plus"></i> Ver Detalles</button>
+                                                        <button type="button" class="btn btn-outline-pink btn-block BtnDetalles" disabled id="btn_detalles"><i class="fas fa-user-plus"></i> Ver Detalles</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,23 +135,60 @@ include("assets/controler/conexion.php"); ?>
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- The Modal -->
+    <div class="modal fade" id="modalEmpleado">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-left-danger shadow">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Detalles del Empleado</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="getEmpleado"></div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         // Modal tarjeta Orden
         $(function() {
-            $(".validar").keydown(function(event) {
+            $("#Empleado").keydown(function(event) {
                 //alert(event.keyCode);
-                if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {
-                    return false;
-                }
                 if (event.keyCode == 13) {
                     buscar();
+                } else if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {
+                    return false;
                 }
             });
         });
 
-        function buscar(){
 
-            var costo = document.getElementById("demo").value;
+
+        $('.BtnDetalles').on('click', function() {
+            var id_button = $("#Empleado").val();
+            $('.getEmpleado').load('./assets/controler/empleado/getDetail.php?id=' + id_button, function() {
+                $('#modalEmpleado').modal({
+                    show: true
+                });
+            });
+        });
+
+
+        function buscar() {
+
+            var costo = $("#Empleado").val();
 
             if (costo == "") {
                 return Swal.fire(
@@ -162,14 +199,14 @@ include("assets/controler/conexion.php"); ?>
             }
 
             $.ajax({
-                url: "./assets/controler/buscar/buscarFolio.php",
+                url: "./assets/controler/buscar/buscarEmpleado.php",
                 type: "post",
                 data: {
                     id: costo
                 },
                 success: function(data) {
-
                     var obj = JSON.parse(data);
+
                     if (obj.status == "ok") {
                         $("#Id_empleado").html("N° Empleado: " + obj.id);
                         $("#Nombre_empleado").html(obj.nombre);
@@ -195,10 +232,11 @@ include("assets/controler/conexion.php"); ?>
             $("#Nombre_empleado").html("");
             $("#Status_empleado").html("");
             $("#Puesto_empleado").html("");
+            $("#Empleado").val("");
+
             document.getElementById("btn_clear").disabled = true;
             document.getElementById("btn_detalles").disabled = true;
         }
-
     </script>
 
 </body>

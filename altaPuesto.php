@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nómina  | Alta Puesto</title>
+    <title> Nómina | Alta Puesto</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -71,7 +71,7 @@ include("assets/controler/conexion.php"); ?>
                                                 <i class="fas fa-hashtag"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Numero de Empleado" name="num_empleado" id="num_empleado" value="">
+                                        <input type="text" class="form-control" placeholder="Numero de Empleado" name="num_empleado" id="num_empleado" readonly="yes" value="">
                                     </div>
                                 </div>
 
@@ -141,6 +141,7 @@ include("assets/controler/conexion.php"); ?>
                                 </div>
 
                                 <!--Campo Edificio/Agencia -->
+
                                 <div class="col-6">
                                     <label>Edificio/Agencia:</label>
                                     <div class="input-group input-group-sm">
@@ -149,7 +150,10 @@ include("assets/controler/conexion.php"); ?>
                                                 <i class="fas fa-city"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Edificio/Agencia" name="edificio_agencia" id="edificio_agencia" value="">
+                                        <select name="edificio_agencia" id="edificio_agencia" class="custom-select" required>
+                                            <option value="0" selected disabled>Selecciona Cedis</option>
+                                            <option value="ESCUELA NORMAL RURAL MIGUEL HIDALGO">ESCUELA NORMAL RURAL MIGUEL HIDALGO</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -179,9 +183,15 @@ include("assets/controler/conexion.php"); ?>
                                                 <i class="fas fa-user-tag"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Status" name="status_emp" id="status_emp" value="">
+                                        <select name="status_emp" id="status_emp" class="custom-select">
+                                            <option value="" disabled selected>Sin asignar</option>
+                                            <option value="Completo">Prueba</option>
+                                            <option value="Medio Turno">Planta</option>
+                                            <option value="Indeterminado">Indeterminado</option>
+                                        </select>
                                     </div>
                                 </div>
+                                
 
 
                             </div>
