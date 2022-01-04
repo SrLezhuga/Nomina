@@ -47,7 +47,7 @@ include("assets/controler/conexion.php"); ?>
                                                     <i class="fas fa-hashtag"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Numero de Empleado" name="form_numero_empleado" required>
+                                            <input type="text" class="form-control" placeholder="Numero de Empleado" name="form_numero_empleado" id="form_numero_empleado" required>
                                         </div>
                                     </div>
 
@@ -355,6 +355,23 @@ include("assets/controler/conexion.php"); ?>
         </script>
     <?php } ?>
     <script>
+        $(document).ready(function() {
+            loadUser();
+        });
+
+        function loadUser() {
+            $.ajax({
+                type: "POST",
+                url: "./assets/controler/empleado/getNum.php",
+                success: function(data) {
+                    var obj = JSON.parse(data);
+                    if (obj.status == "ok") {
+                        $('#form_numero_empleado').val(obj.id_empleado);
+                    }
+                }
+            });
+        }
+
         //Limpiar formularios
         function clean() {
             document.getElementById("cleanForm").reset();
