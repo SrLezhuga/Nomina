@@ -70,7 +70,7 @@ include("assets/controler/conexion.php"); ?>
                                         <div class="input-group ">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class="fas fa-money-bill"></i>
+                                                    <i class="fas fa-list-ol"></i>
                                                 </span>
                                             </div>
                                             <input type="text" class="form-control" placeholder="Número de Seguro" name="form_sueldo" required>

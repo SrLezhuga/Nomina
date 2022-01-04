@@ -4,7 +4,7 @@ include("assets/controler/conexion.php"); ?>
 <html lang="es">
 
 <head>
-    <title> Nómina  | Lista Seguro</title>
+    <title> Nómina | Lista Seguro</title>
     <?php include("assets/common/header.php"); ?>
 </head>
 
@@ -23,7 +23,7 @@ include("assets/controler/conexion.php"); ?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
                 <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
@@ -39,7 +39,7 @@ include("assets/controler/conexion.php"); ?>
                                         <th>Id</th>
                                         <th>Nombre</th>
                                         <th>UMF</th>
-                                        <th>Sueldo Diario</th>
+                                        <th>Número del Seguro</th>
                                         <th>Vigencia</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -60,7 +60,7 @@ include("assets/controler/conexion.php"); ?>
                                                 <td>" . $Empleado['unidad_medica_familiar'] . "</td>
                                                 <td>" . $Empleado['sueldo_diario_imss'] . "</td>
                                                 <td>" . $Empleado['alta_imss'] . "</td>
-                                                <td><button type='button' class='btn btn-outline-light text-dark btn-sm BtnCliente' data-toggle='modal' data-target='#modalCliente'value=" . $Empleado['id_empleado'] . ">
+                                                <td><button type='button' class='btn btn-outline-light text-dark btn-sm BtnSeguro' data-toggle='modal' data-target='#modalCliente'value=" . $Empleado['id_empleado'] . ">
                                                 <i class='fas fa-pencil-alt'></i></button></td>
                                             </tr>
                                         ";
@@ -95,6 +95,92 @@ include("assets/controler/conexion.php"); ?>
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- The Modal -->
+    <div class="modal fade" id="modalSeguro">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-left-danger shadow">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Datos de los Empleados</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="getSeguro">
+                    </div>
+                    <fieldset class="border p-2">
+                        <legend class="w-auto">Acciones:</legend>
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <button type="btn" class="btn btn-outline-pink btn-block" onclick="upSeguro()"><i class="fas fa-user-plus"></i> Actualizar Datos</button>
+                            </div>
+                        </div>
+
+                        <!--/. form-->
+                    </fieldset>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Modal tarjeta cliente
+        $('.BtnSeguro').on('click', function() {
+            var id_button = $(this).val();
+            $('.getSeguro').load('./assets/controler/seguro/getSeg.php?id=' + id_button, function() {
+                $('#modalSeguro').modal({
+                    show: true
+                });
+            });
+        });
+
+        function upSeguro() {
+            var formData = new FormData();
+
+            var numero_empleado = $("#form_numero_empleado").val();
+            
+            var form_umf = $("#form_umf").val();
+
+            var form_sueldo_diario = $("#form_sueldo_diario").val();
+
+            var form_status = $("#form_status").val();
+
+            formData.append("numero_empleado", numero_empleado);
+            formData.append("form_umf", form_umf);
+            formData.append("form_sueldo_diario", form_sueldo_diario);
+            formData.append("form_status", form_status);
+
+            $.ajax({
+                url: "./assets/controler/seguro/upSeg.php",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    if (obj.status == "ok") {
+                        Swal.fire("Mensaje de confirmación", obj.msj, "success");
+                        $('#modalSeguro').modal('hide');
+                    } else {
+                        Swal.fire("Mensaje de confirmación", obj.msj, "error");
+                    }
+                }
+            });
+
+        }
+    </script>
 </body>
 
 </html>

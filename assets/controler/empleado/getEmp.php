@@ -10,7 +10,7 @@ $item = mysqli_fetch_array($resultSet);
 echo '
         <!-- form empleado -->
         <fieldset class="border p-2">
-            <legend class="w-auto">Datos del Empleado:</legend>
+            <legend class="w-auto">Actualizar datos:</legend>
             <div class="row">
 
                 <!--Campo Numero de Empleado -->
