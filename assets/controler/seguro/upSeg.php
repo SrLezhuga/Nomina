@@ -20,9 +20,6 @@ if (
     $data['msj'] = 'Uno o mas campos vacios';
 } else {
 
-    
-
-
     // Consulta segura para evitar inyecciones SQL.
 
     $sql = "INSERT INTO tab_seguro VALUES ('$numero_empleado', 

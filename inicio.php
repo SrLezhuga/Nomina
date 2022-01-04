@@ -38,12 +38,14 @@ date_default_timezone_set("America/Mexico_City");
                         <div class="row">
                             <div class="col-6">
                                 <fieldset class='border p-2'>
-                                    <legend class='w-auto'><?php echo $hoy = date('Y-m-d'); echo $f_month = date('m'); echo $f_day = date('d') ?></legend>
+                                    <legend class='w-auto'><?php echo $hoy = date('Y-m-d');
+                                                            echo $f_month = date('m');
+                                                            echo $f_day = date('d') ?></legend>
                                     <!-- Anuncios Hoy -->
 
                                     <?php
                                     //Cumpleaños
-                                   echo $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado, Date_format(fecha_nacimiento_empleado,'%d') AS Dia, Date_format(fecha_nacimiento_empleado,'%m') AS Mes FROM tab_empleado
+                                    $queryCumpleHoy = "SELECT CONCAT(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) AS nom_empleado, Date_format(fecha_nacimiento_empleado,'%d') AS Dia, Date_format(fecha_nacimiento_empleado,'%m') AS Mes FROM tab_empleado
                                     WHERE Date_format(fecha_nacimiento_empleado,'%d') = $f_day AND Date_format(fecha_nacimiento_empleado,'%m') = $f_month;";
                                     $rsCumpleHoy = mysqli_query($con, $queryCumpleHoy) or die(mysqli_error($con));
                                     $CumpleHoy = mysqli_fetch_array($rsCumpleHoy);
@@ -66,7 +68,17 @@ date_default_timezone_set("America/Mexico_City");
                                         }
                                     }
 
+
+
                                     ?>
+
+
+                                    <div class="alert alert-info alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Aviso</strong><br>No tienes contratos vencidos.
+                                    </div>
+
+
                                 </fieldset>
                             </div>
                             <div class="col-6">
@@ -99,6 +111,11 @@ date_default_timezone_set("America/Mexico_City");
                                     }
 
                                     ?>
+
+<div class="alert alert-info alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Aviso</strong><br>No tienes contratos por vencer.
+                                    </div>
                                 </fieldset>
 
                             </div>

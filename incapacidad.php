@@ -36,14 +36,16 @@ include("assets/controler/conexion.php"); ?>
                             <legend class='w-auto'>Empleado:</legend>
                             <div class="row">
                                 <!--Campo Empleado -->
-                                <div class="col-12">
+                                <div class="col-8">
+                                    <label>Empleado:</label>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <i class="fas fa-user"></i>
                                             </span>
                                         </div>
-                                        <select name="FromEmpleado" id="FromEmpleado" class="mi-selector custom-select" onchange="getEmpleado();">
+
+                                        <select name="FromEmpleado" id="FromEmpleado" class="mi-selector custom-select">
                                             <option value="0" selected disabled>Seleccione datos del empleado</option>
                                             <?php $listEmp = "SELECT id_empleado, concat(apellido_pat_empleado, ' ', apellido_mat_empleado, ' ', nombre_empleado) as nombre, status_empleado FROM nomina.tab_empleado WHERE status_empleado = 'ACTIVO' ORDER BY apellido_pat_empleado ASC";
                                             $rsEmp = mysqli_query($con, $listEmp) or die("Error de consulta");
@@ -51,6 +53,12 @@ include("assets/controler/conexion.php"); ?>
                                                 echo "<option value='" . $itemEmp['id_empleado'] . "'>" . $itemEmp['id_empleado'] . " | " . $itemEmp['nombre'] .  "</option>";
                                             } ?>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>Consultar:</label>
+                                    <div class="input-group ">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-block" onclick="upLista()"><i class="fas fa-database"></i> Cargar Datos</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,6 +163,22 @@ include("assets/controler/conexion.php"); ?>
                 "Formulario vacío",
                 "success"
             );
+        }
+
+        function upLista() {
+            var id_emp = $('#FromEmpleado').val('');
+
+            console.log(id_emp);
+
+            $.ajax({
+                type: "POST",
+                url: "assets/controler/incapacidad/select.php",
+                success: function(data) {
+                   
+                    
+                }
+            });
+
         }
     </script>
 

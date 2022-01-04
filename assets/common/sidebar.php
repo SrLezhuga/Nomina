@@ -39,7 +39,8 @@
             <ul class="dropdown-menu animated fadeInLeft" role="menu">
                 <div class="dropdown-header">Menú Percepciones</div>
 
-                <li><a href="incapacidad">Incapacidad</a></li>
+                <li><a href="listaIncapacidad">Incapacidad</a></li>
+                <li><a href="listaJustificadas">Justificaciones</a></li>
 
             </ul>
         </li>
