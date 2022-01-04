@@ -1,5 +1,5 @@
 <?php
-include("../conexion.php");
+include("../conexion.php"); 
 
 $fecha = $_POST['Fec'];
 $id_emp = $_POST['Ide'];

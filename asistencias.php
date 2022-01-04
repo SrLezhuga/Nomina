@@ -168,6 +168,9 @@ date_default_timezone_set("America/Mexico_City"); ?>
                                         Fec: fecha
                                     },
                                     success: function(data) {
+
+                                        console.log(data);
+
                                         var obj = JSON.parse(data);
                                         if (obj.status == "ok") {
                                             $("#fecha_inicio").html(obj.fec_ini);
