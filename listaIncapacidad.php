@@ -39,8 +39,6 @@ include("assets/controler/conexion.php"); ?>
                                         <th>Id</th>
                                         <th>Nombre</th>
                                         <th>Fecha</th>
-                                        <th>Motivo</th>
-                                        <th>Comentario</th>
                                         <th>Acciones</th>
 
                                     </tr>
@@ -60,8 +58,7 @@ include("assets/controler/conexion.php"); ?>
                                                 <td>" . $Empleado['id_empleado'] . "</td>
                                                 <td>" . $Empleado['nom_empleado'] . "</td>
                                                 <td>" . $Empleado['fecha'] . "</td>
-                                                <td>" . $val_motivo . "</td>
-                                                <td>" . $val_comentario . "</td>
+                                               
                                                 <td><button type='button' class='btn btn-outline-light text-dark btn-sm BtnIncapacidad' data-toggle='modal' data-target='#modalCliente'value=" . $Empleado['id_empleado'] . "|" . $Empleado['fecha'] . ">
                                                 <i class='fas fa-pencil-alt'></i></button></td>
                                              
