@@ -22,7 +22,7 @@ echo '
                                 <i class="fas fa-hashtag"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Empleado" value="' . $item['id_empleado'] . '" autocomplete="off" readonly="yes" required>
+                        <input type="text" id="form_numero_empleado" name="form_numero_empleado"  class="form-control" placeholder="Empleado" value="' . $item['id_empleado'] . '" autocomplete="off" readonly="yes" required>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@ echo '
                                 <i class="fas fa-hospital-alt"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Unidad Medica Familiar" value="' . $item['unidad_medica_familiar'] . '" name="form_umf" required>
+                        <input type="text" class="form-control" placeholder="Unidad Medica Familiar" value="' . $item['unidad_medica_familiar'] . '" name="form_umf" id="form_umf" required>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@ echo '
                                 <i class="fas fa-list-ol"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Número de Seguro" value="' . $item['sueldo_diario_imss'] . '" name="form_sueldo_diario" required>
+                        <input type="text" class="form-control" placeholder="Número de Seguro" value="' . $item['sueldo_diario_imss'] . '" name="form_sueldo_diario" id="form_sueldo_diario" required>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ echo '
                                 <i class="fas fa-question"></i>
                             </span>
                         </div>
-                        <select id="form_status" class="custom-select form-control" required>';
+                        <select id="form_status" name="form_status" class="custom-select form-control" required>';
                         if ($item['alta_imss'] == "VIGENTE") {
                             echo '
                                 <option value="VIGENTE" selected>VIGENTE</option>

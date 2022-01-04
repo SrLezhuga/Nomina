@@ -149,7 +149,7 @@ include("assets/controler/conexion.php"); ?>
             var formData = new FormData();
 
             var numero_empleado = $("#form_numero_empleado").val();
-            
+
             var form_umf = $("#form_umf").val();
 
             var form_sueldo_diario = $("#form_sueldo_diario").val();
@@ -171,10 +171,14 @@ include("assets/controler/conexion.php"); ?>
                     console.log(data);
                     var obj = JSON.parse(data);
                     if (obj.status == "ok") {
-                        Swal.fire("Mensaje de confirmación", obj.msj, "success");
-                        $('#modalSeguro').modal('hide');
+                        Swal.fire("Mensaje de confirmación", obj.msj, "success").then((result) => {
+                            $('#modalSeguro').modal('hide');
+                            location.reload(true)
+                        })
+
                     } else {
                         Swal.fire("Mensaje de confirmación", obj.msj, "error");
+                       
                     }
                 }
             });

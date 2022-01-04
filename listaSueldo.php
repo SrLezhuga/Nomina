@@ -23,7 +23,7 @@ include("assets/controler/conexion.php"); ?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <br>
-            <div class="container">
+            <div class="container-fluid">
 
 
                 <div class="card border-left-pink shadow-lg mb-5 mt-5 ">
@@ -43,7 +43,7 @@ include("assets/controler/conexion.php"); ?>
                                         <th>Fiscal</th>
                                         <th>Complemento</th>
                                         <th>Numero Cuenta</th>
-                                        <th>Acciones</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,8 +64,7 @@ include("assets/controler/conexion.php"); ?>
                                                 <td>$ " . $Empleado['fiscal'] . "</td>
                                                 <td>$ " . $Empleado['complemento'] . "</td>
                                                 <td>" . $Empleado['numero_cuenta'] . "</td>
-                                                <td><button type='button' class='btn btn-outline-light text-dark btn-sm BtnCliente' data-toggle='modal' data-target='#modalCliente'value=" . $Empleado['id_empleado'] . ">
-                                                <i class='fas fa-pencil-alt'></i></button></td>
+                                             
                                             </tr>
                                         ";
                                     } ?>
