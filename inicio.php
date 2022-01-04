@@ -1,4 +1,11 @@
-<?php
+<?php session_start();
+if (isset($_SESSION['code_user']) && !$_SESSION['code_user']==0 ) {
+    # code...
+}else {
+    header("Location: http://" . $_SERVER['HTTP_HOST'] . "/Nomina/Index'");
+}
+
+
 include("assets/controler/conexion.php");
 date_default_timezone_set('UTC');
 date_default_timezone_set("America/Mexico_City");
